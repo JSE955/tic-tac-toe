@@ -46,13 +46,16 @@ function GameController() {
 
     const printNewRound = () => {
         board.printBoard();
-        console.log(`${getCurrentPlayer()}'s turn`);
+        console.log(`${getCurrentPlayer().getName()}'s turn`);
     }
 
     function playRound(option) {
         board.addMark(option, getCurrentPlayer().getMark());
         // checkForWinner
+        switchCurrentPlayer();
         printNewRound();
     }
+
+    return { playRound };
 
 }
