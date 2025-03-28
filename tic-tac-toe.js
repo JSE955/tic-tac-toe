@@ -49,13 +49,41 @@ function GameController() {
         console.log(`${getCurrentPlayer().getName()}'s turn`);
     }
 
+    function checkForWinner() {
+        if (board.getBoard()[0] === board.getBoard()[1] && board.getBoard()[1] === board.getBoard()[2]) {
+            return true;
+        }
+        else if (board.getBoard()[3] === board.getBoard()[4] && board.getBoard()[4] === board.getBoard()[5]) {
+            return true;
+        } 
+        else if (board.getBoard()[6] === board.getBoard()[7] && board.getBoard()[7] === board.getBoard()[8]) {
+            return true;
+        } 
+        else if (board.getBoard()[0] === board.getBoard()[4] && board.getBoard()[4] === board.getBoard()[8]) {
+            return true;
+        }
+        else if (board.getBoard()[2] === board.getBoard()[4] && board.getBoard()[4] === board.getBoard()[6]) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     function playRound(option) {
         board.addMark(option, getCurrentPlayer().getMark());
-        // checkForWinner
+        if (checkForWinner()) {
+            console.log(`${getCurrentPlayer().getName()} wins!`);
+            return;
+        }
         switchCurrentPlayer();
         printNewRound();
     }
 
+    printNewRound();
+
     return { playRound };
 
 }
+
+const game = GameController();
